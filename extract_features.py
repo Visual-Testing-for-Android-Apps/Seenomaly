@@ -161,7 +161,7 @@ def _concat_image(root, file_name):
     image_list.append(image)
   return image_list
 
-def extract_features(net_name, ck_path, logits_name, image_paths, save_dir, test_label = os.path.join(constants.DATA_PATH, "test_data", "images", "label.txt"), batch_size = 1, image_dims = (224, 224, 3), frames = 8, max_num_images = 225, _num_classes = 50):
+def extract_features(net_name, ck_path, save_pca, logits_name, image_paths, save_dir, test_label = os.path.join(constants.DATA_PATH, "test_data", "images", "label.txt"), batch_size = 1, image_dims = (224, 224, 3), frames = 8, max_num_images = 225, _num_classes = 50):
   global num_classes
   num_classes = _num_classes
   global _STRIDE
@@ -207,15 +207,22 @@ def extract_features(net_name, ck_path, logits_name, image_paths, save_dir, test
     feat = np.squeeze(feat)
     features.append(feat)
 
-  print(features[0], len(features[0]))
-
   features = np.array(features)
-  pca = PCA(n_components=200)
-  pca.fit(features)
-  pca_features = pca.transform(features)
 
   if not os.path.exists(save_dir):
     os.makedirs(save_dir) 
+  
+  if save_pca:
+    pca = PCA(n_components=200)
+    pca.fit(features)
+    pickle.dump(pca, open(os.path.join(save_dir, 'pca.p'), 'wb'))
+  else:
+    pca = pickle.load(open(os.path.join(save_dir, 'pca.p'), 'rb'))
+  
+  pca_features = pca.transform(features)
+
+  if not save_pca:
+    return (gif_files, pca_features, labels)
 
   pickle.dump([gif_files, pca_features, labels], open(os.path.join(save_dir, 'features.p'), 'wb'))
 
@@ -253,7 +260,7 @@ if __name__ == '__main__':
 
   save_dir = os.path.join(constants.DATA_PATH, "features", "real", args.netName)
 
-  exit(extract_features(args.netName, ck_path, logits_name, image_paths, save_dir))
+  exit(extract_features(args.netName, ck_path, True, logits_name, image_paths, save_dir))
 
 
 

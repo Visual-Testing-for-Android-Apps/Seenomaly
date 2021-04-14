@@ -41,7 +41,8 @@ def main(args, modelDir):
     ckPath = os.path.join(constants.ROOT_PATH, "Seenomaly", "models", args.netName, f"model.ckpt-{args.checkpoint}")
     imagePaths = [os.path.join(constants.DATA_PATH,"custom","label.txt")]
     saveDir = os.path.join(constants.DATA_PATH,"custom")
-    extract_features.extract_features(args.netName, ckPath, logitsName, imagePaths, saveDir)
+    gif_files, pca_features, labels = extract_features.extract_features(args.netName, ckPath, False, logitsName, imagePaths, os.path.join(constants.DATA_PATH, "features", "real", args.netName))
+    print("gif_files = {}\npca_features = {}, {}\nlabels = {}".format( gif_files, pca_features[0], len(pca_features[0]), labels))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "Process a file through the model")
