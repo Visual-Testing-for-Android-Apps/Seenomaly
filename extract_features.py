@@ -193,7 +193,7 @@ def extract_features(net_name, ck_path, save_pca, logits_name, image_paths, save
     labels.append(filename.strip().split()[1])
   for filename in image_lists:
     gif_files.append(filename.strip().split()[0])
-    labels.append(0)
+    labels.append(filename.strip().split()[1])
 
   print("keeping %d images to analyze" % (len(image_lists) + len(test_list)))
 
@@ -214,14 +214,11 @@ def extract_features(net_name, ck_path, save_pca, logits_name, image_paths, save
   
   if save_pca:
     pca = PCA(n_components=200)
-    pca.fit(features)
+    pca_features = pca.fit_transform(features)
     pickle.dump(pca, open(os.path.join(save_dir, 'pca.p'), 'wb'))
   else:
     pca = pickle.load(open(os.path.join(save_dir, 'pca.p'), 'rb'))
-  
-  pca_features = pca.transform(features)
-
-  if not save_pca:
+    pca_features = pca.transform(features)
     return (gif_files, pca_features, labels)
 
   pickle.dump([gif_files, pca_features, labels], open(os.path.join(save_dir, 'features.p'), 'wb'))
