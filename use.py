@@ -78,9 +78,9 @@ def main(args, modelDir):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "Process a file through the model")
     #parser.add_argument("file", nargs='?', help="file to be processed", default=None)
-    parser.add_argument("-o", "--out", help="overwrites the default output name (format is automatically added)", default=os.path.join(constants.DATA_PATH, "results", "result"))
-    parser.add_argument("-n", "--netName", help="chooses the network type to be used", choices= ("gan", "vae", "vaegan", "aernn"), default="gan")
-    parser.add_argument("-c", "--checkpoint", help="sets the checkpint number", type=int, default=29471)
+    parser.add_argument("-o", "--out", help="overwrites the default output name (format is automatically added). Default is ./data/results/result", default=os.path.join(constants.DATA_PATH, "results", "result"))
+    parser.add_argument("-n", "--netName", help="chooses the network type to be used, default is gan", choices= ("gan", "vae", "vaegan", "aernn"), default="gan")
+    parser.add_argument("-c", "--checkpoint", help="sets the checkpoint number, default is 29471", type=int, default=29471)
 
     args = parser.parse_args()
 
