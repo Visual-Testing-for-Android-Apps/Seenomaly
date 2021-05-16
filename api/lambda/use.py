@@ -46,7 +46,7 @@ def evaluate(modelDir, toCompare):
     neigh = KNeighborsClassifier(n_neighbors=K)
     neigh.fit(x_train, y_train)
     yPred = neigh.predict(toCompare)
-    print(neigh.score(toCompare, [4]))
+    #print(neigh.score(toCompare, [4]))
     #testList.sort()
     #print(testList)
     return yPred[0]
@@ -71,8 +71,7 @@ def main(netName, checkpoint, modelDir, videoArray):
     ]
 
     pred = evaluate(modelDir, pcaFeatures)
-    print("Prediciton: {}".format(pred))
-    print("Result: {}".format(resultString[pred]))
+    return (pred, resultString[pred])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "Process a file through the model")

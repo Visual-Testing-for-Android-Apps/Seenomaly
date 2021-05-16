@@ -7,12 +7,12 @@ import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 tf.get_logger().setLevel(logging.ERROR)
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from nets import nets_factory
 import tf_slim as slim
 import numpy as np
 from sklearn.decomposition import PCA
-from tqdm import tqdm
+#from tqdm import tqdm
 import pickle
 import random
 import math

@@ -25,4 +25,9 @@ if __name__ == "__main__":
 
     print(len(event.json()["res_video"]))
 
-    print(app.handler(event, None))
+    res = app.handler(event, None)
+
+    print(res)
+    j = json.loads(res["body"])
+    print("Prediciton: {}".format(j["classification"]))
+    print("Result: {}".format(j["explanation"]))
