@@ -1,0 +1,4 @@
+model_checkpoint_path: "/home/cheer/Project/Do_Dont/models/gan/model.ckpt-29471"
+all_model_checkpoint_paths: "/home/cheer/Project/Do_Dont/models/gan/model.ckpt-29324"
+all_model_checkpoint_paths: "/home/cheer/Project/Do_Dont/models/gan/model.ckpt-29397"
+all_model_checkpoint_paths: "/home/cheer/Project/Do_Dont/models/gan/model.ckpt-29471"
