@@ -20,7 +20,7 @@ def fromJson(res):
         frames = []
 
         for i in range(8):
-            video.seek(cur, any_frame=True)
+            pos = video.seek(cur)#, any_frame=True)
             for frame in video.decode(video=0):
                 img = frame.to_image()
                 img = img.resize((224, 224), 2)
