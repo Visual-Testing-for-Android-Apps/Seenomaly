@@ -19,13 +19,14 @@ if __name__ == "__main__":
     base64_string = base64_bytes.decode("utf-8")
     raw_data = base64_string
 
-    event = testPacket({
-        "res_video" :  raw_data
-    })
+    # event = testPacket({
+    #     "res_video" :  raw_data
+    # })
 
-    print(len(event.json()["res_video"]))
 
-    res = app.handler(event, None)
+    #print(len(event.json()["res_video"]))
+
+    res = app.handler({"body":raw_data}, None)
 
     print(res)
     j = json.loads(res["body"])

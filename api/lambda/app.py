@@ -8,6 +8,7 @@ def handler(event, context):
         netName = "gan"
         checkpoint = 29471
         modelDir = os.path.join("models", netName)
+        print("start")
         (x, msg) = use.main(netName, checkpoint, modelDir, preprocess.fromJson(event))
         return {
             "statusCode": 200,
