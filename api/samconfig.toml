@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "seenomaly-docker-lambda-v1"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-126yqm61u6qk8"
+s3_prefix = "seenomaly-docker-lambda-v1"
+region = "ap-southeast-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = ["SeenomalyFunction=556709552225.dkr.ecr.ap-southeast-2.amazonaws.com/seenomaly-docker-lambda-repo"]

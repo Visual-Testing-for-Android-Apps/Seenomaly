@@ -212,41 +212,41 @@ def extract_features(videoArray, net_name, ck_path, save_pca, logits_name, image
   pca_features = pca.transform(features)
   return pca_features
 
-if __name__ == '__main__':
-  """
-  gan:gan/generator/encoder/fc6  ROOT_PATH/Seenomaly/models/gan/model.ckpt-29471
-  vae:vae/encoder/fc6  ROOT_PATH/Seenomaly/models/vae/model.ckpt-54717
-  vaegan:vaegan/generator/encoder/fc6  ROOT_PATH/Seenomaly/models/vaegan/model.ckpt-121858
-  aernn:aernnfc  ROOT_PATH/Seenomaly/models/aernn/model.ckpt-52198
+# if __name__ == '__main__':
+#   """
+#   gan:gan/generator/encoder/fc6  ROOT_PATH/Seenomaly/models/gan/model.ckpt-29471
+#   vae:vae/encoder/fc6  ROOT_PATH/Seenomaly/models/vae/model.ckpt-54717
+#   vaegan:vaegan/generator/encoder/fc6  ROOT_PATH/Seenomaly/models/vaegan/model.ckpt-121858
+#   aernn:aernnfc  ROOT_PATH/Seenomaly/models/aernn/model.ckpt-52198
 
-  ROOT_PATH/Seenomaly/data/synthetic_data/label.txt
-  ROOT_PATH/Seenomaly/data/test_data/images/label.txt
-  """
+#   ROOT_PATH/Seenomaly/data/synthetic_data/label.txt
+#   ROOT_PATH/Seenomaly/data/test_data/images/label.txt
+#   """
 
-  parser = argparse.ArgumentParser(description = "Process baseline dataset for model")
-  parser.add_argument("-n", "--netName", help="chooses the network type to be used", choices= ("gan", "vae", "vaegan", "aernn"), default="gan")
-  parser.add_argument("-c", "--checkpoint", help="sets the checkpint number", type=int, default=29471)
+#   parser = argparse.ArgumentParser(description = "Process baseline dataset for model")
+#   parser.add_argument("-n", "--netName", help="chooses the network type to be used", choices= ("gan", "vae", "vaegan", "aernn"), default="gan")
+#   parser.add_argument("-c", "--checkpoint", help="sets the checkpint number", type=int, default=29471)
 
-  args = parser.parse_args()
+#   args = parser.parse_args()
 
-  logits_name = "gan/generator/encoder/fc6"
-  ck_path = os.path.join(constants.ROOT_PATH, "Seenomaly", "models", args.netName, f"model.ckpt-{args.checkpoint}")
+#   logits_name = "gan/generator/encoder/fc6"
+#   ck_path = os.path.join(constants.ROOT_PATH, "Seenomaly", "models", args.netName, f"model.ckpt-{args.checkpoint}")
 
-  #batch_size = 1
-  #image_size = 224
-  #_STRIDE = 8
+#   #batch_size = 1
+#   #image_size = 224
+#   #_STRIDE = 8
 
-  #num_classes = 50
-  #max_num_images = 225
+#   #num_classes = 50
+#   #max_num_images = 225
 
-  #test_label = os.path.join(constants.DATA_PATH, "test_data", "images", "label.txt")
-  normal_label = os.path.join(constants.DATA_PATH, "label.txt")
+#   #test_label = os.path.join(constants.DATA_PATH, "test_data", "images", "label.txt")
+#   normal_label = os.path.join(constants.DATA_PATH, "label.txt")
 
-  image_paths = [normal_label]
+#   image_paths = [normal_label]
 
-  save_dir = os.path.join(constants.DATA_PATH, "features", "real", args.netName)
+#   save_dir = os.path.join(constants.DATA_PATH, "features", "real", args.netName)
 
-  exit(extract_features(args.netName, ck_path, True, logits_name, image_paths, save_dir))
+#   exit(extract_features(args.netName, ck_path, True, logits_name, image_paths, save_dir))
 
 
 

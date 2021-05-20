@@ -53,7 +53,7 @@ def evaluate(modelDir, toCompare):
 
 def main(netName, checkpoint, modelDir, videoArray):
     logitsName = "gan/generator/encoder/fc6"
-    ckPath = os.path.join(constants.ROOT_PATH, "models", netName, f"model.ckpt-{checkpoint}")
+    ckPath = os.path.join(modelDir, f"model.ckpt-{checkpoint}")
     imagePaths = [os.path.join(constants.DATA_PATH,"custom","label.txt")]
     pcaFeatures = extract_features.extract_features(videoArray, netName, ckPath, False, logitsName, imagePaths, modelDir)
 
@@ -73,17 +73,17 @@ def main(netName, checkpoint, modelDir, videoArray):
     pred = evaluate(modelDir, pcaFeatures)
     return (pred, resultString[pred])
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description = "Process a file through the model")
-    #parser.add_argument("file", nargs='?', help="file to be processed", default=None)
-    parser.add_argument("-o", "--out", help="overwrites the default output name (format is automatically added). Default is ./data/results/result", default=os.path.join(constants.DATA_PATH, "results", "result"))
-    parser.add_argument("-n", "--netName", help="chooses the network type to be used, default is gan", choices= ("gan", "vae", "vaegan", "aernn"), default="gan")
-    parser.add_argument("-c", "--checkpoint", help="sets the checkpoint number, default is 29471", type=int, default=29471)
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser(description = "Process a file through the model")
+#     #parser.add_argument("file", nargs='?', help="file to be processed", default=None)
+#     parser.add_argument("-o", "--out", help="overwrites the default output name (format is automatically added). Default is ./data/results/result", default=os.path.join(constants.DATA_PATH, "results", "result"))
+#     parser.add_argument("-n", "--netName", help="chooses the network type to be used, default is gan", choices= ("gan", "vae", "vaegan", "aernn"), default="gan")
+#     parser.add_argument("-c", "--checkpoint", help="sets the checkpoint number, default is 29471", type=int, default=29471)
 
-    args = parser.parse_args()
+#     args = parser.parse_args()
 
-    # Verification
-    #if args.file == None: printExit("File must be present, use --help for more information.")
+#     # Verification
+#     #if args.file == None: printExit("File must be present, use --help for more information.")
 
-    modelDir = os.path.join(constants.ROOT_PATH, "models", args.netName)
-    main(args, modelDir)
+#     modelDir = os.path.join(constants.ROOT_PATH, "models", args.netName)
+#     main(args, modelDir)
